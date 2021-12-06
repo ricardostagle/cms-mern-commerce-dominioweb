@@ -15,9 +15,12 @@ Features present in the app :-
 
 1.  **Configure default configs**. In `config/default.json`, set your variables.
 
-	1. `dbUrl`: It can be set as `mongodb://localhost/MernECommerce`.
+	1. `dbUrl`: It can be set as `mongodb://localhost/MernECommerce`. Needed to create a Mondo DB locally or online previously.
 NOTE: This is very basic, one without any username and password. This can be configured as per your requirement.
   2. `jwtsecret`: This is the key used sign jwt tokens. It can be set as `dummySecret`.
   3. `StripeAPIKey`: Create your account here [register](https://dashboard.stripe.com/register).
 2. Install dependencies with `npm i`.
 3. Server will start running on [port 4000](http://localhost:4000).
+4. Create the client `npm run client-install`.
+5. If issues appeared run `npm audix fix`.
+6. Execute website locally with `npm run dev`.
