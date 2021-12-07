@@ -1,5 +1,5 @@
 {
-    "dbURI": "https://data.mongodb-api.com/app/data-ccqen/endpoint/data/beta/e-commerce",
+    "dbURI": "mongodb://localhost/e-commerce",
     "jwtsecret": "dummySecret",
     "StripeAPIKey": "sk_test_51K0BLiEu1f5ftWEy3QRpIBwS0YLYDE8vIdUZEmaemGjlWnAazEj9WIHZBNJUeiXqT2Illmphww9zNLqcZbWaZR3T00AOxQO6pB"
 }
