@@ -1,9 +1,7 @@
 import { Component } from "react";
 import AppNavbar from "./AppNavbar";
 import Footer from "./Footer";
-import {Card, CardText, CardBody, CardTitle, CardSubtitle, Alert} from "reactstrap";
 
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -48,12 +46,6 @@ class Users extends Component {
           window.location = '/delete/'+id
         }
         const { users } = this.props.user;
-
-        if (this.props.isAuthenticated ){
-            const userAuth = this.props.userAuth;
-         }
-
-        const userAuth = this.props.userAuth;
 
         return (
           <div>

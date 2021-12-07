@@ -29,8 +29,6 @@ class AppNavbar extends Component {
                //MENU APPEAR AND HIDE
                 
                 $(window).scroll(function() {
-
-                    "use strict";
                     
                     if ($(window).scrollTop() > 100) {
                         $("#navbar-component").css({
@@ -89,7 +87,6 @@ class AppNavbar extends Component {
                 });
 
                 setInterval(function() {
-                    "use strict";
                     var widnowHeight = $(window).height();
                     var containerHeight = $(".home-container").height();
                     var padTop = widnowHeight - containerHeight;
@@ -103,7 +100,7 @@ class AppNavbar extends Component {
                 $(function() {
 
                   $('a[href*=\\#]:not([href=\\#])').click(function() {
-                    if (window.location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && window.location.hostname === this.hostname) {
+                    if (window.location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && window.location.hostname === this.hostname) {
                       var target = $(this.hash);
                       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
                       if (target.length) {

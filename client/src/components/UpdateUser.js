@@ -10,7 +10,6 @@ import Container from '@material-ui/core/Container';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateUser } from "../actions/userActions";
-import { Link } from "react-router-dom"
 
 class UpdateUser extends Component {
 

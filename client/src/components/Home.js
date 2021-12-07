@@ -4,8 +4,6 @@ import Footer from './Footer';
 //import {Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Container, Alert} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/itemActions';
-import { addToCart } from '../actions/cartActions';
 import '../css/font-awesome.min.css';
 import '../css/pe-icon-7-stroke.css';
 
@@ -24,26 +22,12 @@ class Home extends Component {
         this.setState({random: Math.round(this.min + (Math.random() * (this.max - this.min)))});
     };
 
-    componentDidMount(){
-        this.props.getItems();
-    }
-
     static propTypes = {
-        getItems: PropTypes.func.isRequired,
-        item: PropTypes.object.isRequired,
         isAuthenticated: PropTypes.bool,
-        addToCart: PropTypes.func.isRequired,
         user: PropTypes.object.isRequired
     }
 
-    onAddToCart = async (id, productId) => {
-        await this.props.addToCart(id, productId, 1);
-        alert ('Item added to Cart');
-    }
-
     render(){
-        const { items } = this.props.item;
-        const user = this.props.user;
 
         return (
             <div>
@@ -357,9 +341,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    item: state.item,
-    isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.user
+    isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, {getItems, addToCart})(Home);
+export default connect(mapStateToProps, {})(Home);

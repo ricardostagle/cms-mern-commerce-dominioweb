@@ -1,4 +1,4 @@
-import { Component, useState } from "react";
+import { Component } from "react";
 import AppNavbar from "./AppNavbar";
 import Footer from "./Footer";
 import { CardText, CardBody,  CardSubtitle, Button, Container, Alert} from "reactstrap";
@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getItems } from "../actions/itemActions";
 import { addToCart } from "../actions/cartActions";
-//import { Link } from 'react-router-dom'
 
 class Detail extends Component {
 
@@ -52,11 +51,10 @@ class Detail extends Component {
         const id = pathname.substring(6)
 
         let item = items.filter(item => {
-            if(item._id == id) {
+            if(item._id === id) {
                 return item;
             }
         });
-
 
         let ifImage 
         if (item.length) { 

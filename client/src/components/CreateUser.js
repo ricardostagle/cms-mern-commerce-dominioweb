@@ -7,24 +7,66 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import {
+  Modal,
+    ModalHeader,
+    ModalBody,
+    Input,
+    NavLink,
+    Alert
+} from 'reactstrap';
+
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { addUser } from "../actions/userActions";
-import { Link } from "react-router-dom"
+import { clearErrors } from '../actions/errorActions';
 
 class CreateUser extends Component {
 
     state = {
+      modal: false,
         name: '',
         surname: '',
         email: '',
         password: '',
         avatar: '',
+        msg: null
     }
 
     static propTypes = {
-        isAuthenticated: PropTypes.bool
+      isAuthenticated: PropTypes.bool,
+      error: PropTypes.object.isRequired,
+      addUser: PropTypes.func.isRequired,
+      clearErrors: PropTypes.func.isRequired
     }
+
+    componentDidUpdate(prevProps) {
+      const { error, isAuthenticated } = this.props;
+      if(error !== prevProps.error){
+          // Check for register error
+          if(error.id === 'REGISTER_FAIL'){
+              this.setState({msg: error.msg.msg});
+          }
+          else{
+              this.setState({msg:null});
+          }
+      }
+
+      // If authenticated, close modal
+      if(this.state.modal){
+          if(isAuthenticated){
+              this.toggle();
+          }
+      }
+  }
+
+  toggle = () => {
+      // Clear errors
+      this.props.clearErrors();
+      this.setState({
+          modal: !this.state.modal
+      });
+  }
 
     onChange = (e) => {
         this.setState({[e.target.name]:e.target.value});
@@ -33,6 +75,9 @@ class CreateUser extends Component {
     onSubmit = async (e) => {
         e.preventDefault();
 
+        const { name, surname, email, password, avatar } = this.state;
+
+        // Crete user object
         const newUser = {
             name: this.state.name,
             surname: this.state.surname,
@@ -41,46 +86,21 @@ class CreateUser extends Component {
             avater: this.state.avatar
         }
 
-        await this.props.addUser(newUser);
+        // Attempt to register
+        this.props.addUser(newUser);
 
-        alert('Item added successfully');
+        alert('User created successfully');
     }
 
 
     render(){
 
-        const handleSubmit = event => {
-          event.preventDefault();
-          var data = {
-            name: this.state.name,
-            surname: this.state.surname,
-            email: this.state.email,
-            password: this.state.password,
-            avater: this.state.avatar
-          }
-          fetch('/users/create', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/form-data',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-          .then(res => res.json())
-          .then(
-            (result) => {
-              alert(result['message'])
-              if (result['status'] === 'ok') {
-                window.location.href = '/';
-              }
-            }
-          )
-        }
-
         return (
           <div>
             <AppNavbar/>
               <div class=" row-content">
+             
+                {this.state.msg ? (<Alert color="danger">{this.state.msg}</Alert>):null}
                 <Container maxWidth="xs">
                   <Typography component="h1" variant="h5">
                     Create User
@@ -90,14 +110,13 @@ class CreateUser extends Component {
                       <Grid item xs={12} sm={6}>
                         <TextField
                           autoComplete="name"
-                          name="firstName"
+                          name="name"
                           variant="outlined"
                           required
                           fullWidth
-                          id="firstName"
+                          id="name"
                           label="First Name"
                           onChange={this.onChange}
-                          autoFocus
                         />
                       </Grid>
                       <Grid item xs={12} sm={6}>
@@ -105,7 +124,8 @@ class CreateUser extends Component {
                           variant="outlined"
                           required
                           fullWidth
-                          id="lastName"
+                          id="surname"
+                          name="surname"
                           label="Last Name"
                           onChange={this.onChange}
                         />
@@ -115,28 +135,19 @@ class CreateUser extends Component {
                           variant="outlined"
                           required
                           fullWidth
-                          id="username"
-                          label="Username"
-                          onChange={this.onChange}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          variant="outlined"
-                          required
-                          fullWidth
                           id="email"
+                          name="email"
                           label="Email"
                           onChange={this.onChange}
                         />
                       </Grid>
                       <Grid item xs={12}>
-                        <TextField
-                          variant="outlined"
-                          required
-                          fullWidth
+                        <Input
+                          type="password"
+                          name="password"
                           id="password"
-                          label="Password"
+                          placeholder="Password"
+                          className="mb-3"
                           onChange={this.onChange}
                         />
                       </Grid>
@@ -146,6 +157,7 @@ class CreateUser extends Component {
                           required
                           fullWidth
                           id="avatar"
+                          name="avatar"
                           label="Avatar"
                           onChange={this.onChange}
                         />
@@ -160,7 +172,7 @@ class CreateUser extends Component {
                       Create
                     </Button>
                   </form>
-              </Container>
+              </Container>   
             </div>
           <Footer/>
         </div>
@@ -170,9 +182,8 @@ class CreateUser extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user,
-    isAuthenticated: state.auth.isAuthenticated,
-    userAuth: state.auth.user
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.error
 })
 
-export default connect(mapStateToProps, {addUser})(CreateUser);
+export default connect(mapStateToProps, {addUser, clearErrors})(CreateUser);
