@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import AppNavbar from './AppNavbar';
 import Footer from './Footer';
-//import {Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Container, Alert} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../css/font-awesome.min.css';

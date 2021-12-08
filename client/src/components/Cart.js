@@ -1,5 +1,6 @@
 import { Component, Fragment } from 'react';
 import AppNavbar from './AppNavbar';
+import Footer from './Footer';
 import {Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Alert, Container} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -92,6 +93,7 @@ class Cart extends Component {
                     </div>
                 </Container>
                     :null}
+                <Footer/>
             </div>
             
         )

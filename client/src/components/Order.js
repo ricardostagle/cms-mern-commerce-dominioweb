@@ -1,5 +1,6 @@
 import { Component, Fragment } from 'react';
 import AppNavbar from './AppNavbar';
+import Footer from './Footer';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getOrders } from '../actions/orderActions';
@@ -69,6 +70,7 @@ class Orders extends Component {
                         </div>
                     </Container>
                 :null}
+                <Footer/>
             </div>
         )
     }
