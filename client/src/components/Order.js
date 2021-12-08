@@ -43,7 +43,7 @@ class Orders extends Component {
 
                 {this.props.isAuthenticated && !this.props.order.loading && this.state.loaded && this.props.order.orders.length?
                     <Container>
-                        <div className="row">
+                        <div className="row row-content">
                             {this.props.order.orders.map((order)=>(
                                 <div className="col-md-12">
                                     <Card>

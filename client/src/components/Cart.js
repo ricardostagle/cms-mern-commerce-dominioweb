@@ -56,13 +56,13 @@ class Cart extends Component {
             
                 {this.props.isAuthenticated && !this.props.cart.loading && this.state.loaded && this.props.cart.cart?
                 <Container>
-                    <div className="row">
+                    <div className="row row-content">
                         {this.props.cart.cart.items.map((item)=>(
                             <div className="col-md-4">
                         <Card>
                             <CardBody>
                                 <CardTitle tag="h5">{item.name}</CardTitle>
-                                <CardSubtitle tag="h6">Rs. {item.price}</CardSubtitle>
+                                <CardSubtitle tag="h6">$ {item.price}</CardSubtitle>
                                 <div style={qtyBox}>
                                   <p style={{...qtyBtn, border:"1px solid red", color: "Red"}} onClick={() => this.onUpdateQuantity(user._id, item.productId, item.quantity - 1)}>
                                     -1
@@ -81,7 +81,7 @@ class Cart extends Component {
                         <div class="col-md-12">
                         <Card>
                             <CardBody>
-                                <CardTitle tag="h5">Total Cost = Rs. {this.props.cart.cart.bill}</CardTitle>
+                                <CardTitle tag="h5">Total Cost = $ {this.props.cart.cart.bill}</CardTitle>
                                 <Checkout
                                     user={user._id}
                                     amount={this.props.cart.cart.bill}
