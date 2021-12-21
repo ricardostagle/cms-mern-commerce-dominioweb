@@ -1,5 +1,5 @@
 {
-    "dbURI": "mongodb+srv://rich:ivan@cluster0.byvg0.mongodb.net/e-commerce?retryWrites=true&w=majority",
+    "dbURI": "mongodb://localhost/e-commerce",
     "jwtsecret": "dummySecret",
     "StripeAPIKey": "sk_test_51K0BLiEu1f5ftWEy3QRpIBwS0YLYDE8vIdUZEmaemGjlWnAazEj9WIHZBNJUeiXqT2Illmphww9zNLqcZbWaZR3T00AOxQO6pB"
 }
