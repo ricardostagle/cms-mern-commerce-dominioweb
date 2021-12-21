@@ -12,6 +12,7 @@ export const GET_ORDERS = 'GET_ORDERS';
 export const CHECKOUT = 'CHECKOUT';
 export const GET_USERS = 'GET_USERS';
 export const ADD_USER = 'ADD_USER';
+export const NEW_USER_FAIL = 'NEW_USER_FAIL';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const USERS_LOADING = 'USERS_LOADING';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_USERS, ADD_USER, DELETE_USER, UPDATE_USER, USERS_LOADING} from './types';
+import { GET_USERS, ADD_USER, DELETE_USER, UPDATE_USER, USERS_LOADING, NEW_USER_FAIL} from './types';
 import { returnErrors } from './errorActions';
 
 export const getUsers = () => dispatch => {
@@ -13,12 +13,19 @@ export const getUsers = () => dispatch => {
 }
 
 export const addUser = (user) => (dispatch) => {
+
     axios.post('/api/users', user)
         .then(res => dispatch({
             type: ADD_USER,
             payload: res.data
         }))
-        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'NEW_USER_FAIL'));
+            dispatch({
+                type: NEW_USER_FAIL
+            });
+        });
+
 }
 
 export const deleteUser = (id) => (dispatch) => {

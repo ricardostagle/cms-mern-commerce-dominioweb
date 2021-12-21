@@ -22,4 +22,3 @@ module.exports.delete_user = (req,res) => {
         res.json({success: true});
     });
 }
-

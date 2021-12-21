@@ -3,7 +3,8 @@ import {
     ADD_USER,
     DELETE_USER,
     UPDATE_USER,
-    USERS_LOADING
+    USERS_LOADING,
+    NEW_USER_FAIL
 } from '../actions/types';
 
 const initialState = {
@@ -26,6 +27,14 @@ export default function(state=initialState, action){
                 ...state,
                 users: [action.payload, ...state.users]
             }
+
+        case NEW_USER_FAIL:
+            return{
+                msg: {},
+                status: null,
+                id: null
+            };
+               
         
         case DELETE_USER:
             return{
@@ -37,7 +46,7 @@ export default function(state=initialState, action){
             const { id, data } = action.payload;
             return{
                 ...state,
-                users: state.users.map(user => {
+                users: state.users.filter(user => {
                     if(user._id===id){
                         user = data;
                     }
