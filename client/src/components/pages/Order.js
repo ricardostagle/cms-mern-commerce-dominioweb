@@ -32,6 +32,8 @@ class Orders extends Component {
         return(
             <div>
                 <AppNavbar/>
+                <Container>
+                <div className="row-content">
                 {this.props.isAuthenticated ?
                     <Fragment>
                         {this.props.order.orders!==[] ? null :
@@ -42,8 +44,8 @@ class Orders extends Component {
                 }
 
                 {this.props.isAuthenticated && !this.props.order.loading && this.state.loaded && this.props.order.orders.length?
-                    <Container>
-                        <div className="row row-content">
+
+                        <div className="row">
                             {this.props.order.orders.map((order)=>(
                                 <div className="col-md-12">
                                     <Card>
@@ -68,8 +70,10 @@ class Orders extends Component {
                                 
                             ))}
                         </div>
-                    </Container>
+                    
                 :null}
+                    </div>
+                </Container>
                 <Footer/>
             </div>
         )

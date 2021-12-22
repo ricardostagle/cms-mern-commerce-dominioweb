@@ -1,9 +1,10 @@
 import { Component } from "react";
 import AppNavbar from '../header/AppNavbar';
 import Footer from '../footer/Footer';
-import {Card, CardText, CardBody, CardTitle, CardSubtitle, Alert} from "reactstrap";
+import {
+    Alert
+} from 'reactstrap';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -20,57 +21,55 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getUsers } from "../../actions/userActions";
+import { getItems, deleteItem, updateItem } from "../../actions/itemActions";
 import { Link } from "react-router-dom"
 
-class Users extends Component {
+class Items extends Component {
 
     componentDidMount(){
-        this.props.getUsers();
+        this.props.getItems();
     }
 
     static propTypes = {
-        getUsers: PropTypes.func.isRequired,
-        user: PropTypes.object.isRequired,
+        getItems: PropTypes.func.isRequired,
+        UpdatedItem: PropTypes.func.isRequired,
+        deleteItem: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
         isAuthenticated: PropTypes.bool,
         userAuth: PropTypes.object.isRequired
     }
 
     render(){
-        const CreateUser = id => {
-          window.location = '/adduser'
+        const CreateItem = id => {
+          window.location = '/add-item'
         }
-        const UpdateUser = id => {
-          window.location = '/update_user/'+id
+        const UpdateItem = (item) => {
+          window.location = '/update-item/'+item._id
         }
 
-        const DeleteUser = id => {
-          window.location = '/delete/'+id
+        const DeleteItem = id => {
+          // Attempt to register
+          this.props.deleteItem(id);
         }
-        const { users } = this.props.user;
 
-        if (this.props.isAuthenticated ){
-            const userAuth = this.props.userAuth;
-         }
-
-        const userAuth = this.props.userAuth;
+        const { items } = this.props.item;
 
         return (
           <div>
+
           <AppNavbar/>
 
           <div className="row-content">
-            <Container maxWidth="lg">    
+            <Container maxWidth="lg">  
+            { this.props.isAuthenticated ?    
               <Paper >
                 <Box display="flex">
                   <Box flexGrow={1}>
-                    <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                      USERS
-                    </Typography>
+                    <Typography component="h2" variant="h6" color="primary" gutterBottom>ITEMS</Typography>
                   </Box>
                   <Box>
                     <Link to="/create">
-                      <Button variant="contained" color="primary" onClick={() => UpdateUser(null)}>CREATE</Button>
+                      <Button onClick={() => CreateItem()}>Create Item</Button>
                     </Link>
                   </Box>
                 </Box>
@@ -78,31 +77,23 @@ class Users extends Component {
                 <Table aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="right">ID</TableCell>
-                      <TableCell align="center">Avatar</TableCell>
-                      <TableCell align="left">First</TableCell>
-                      <TableCell align="left">Last</TableCell>
-                      <TableCell align="left">Username</TableCell>
+                      <TableCell align="left">Title</TableCell>
+                      <TableCell align="left">Description</TableCell>
+                      <TableCell align="left">Date</TableCell>
                       <TableCell align="center">Action</TableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
-                    {users.map((user) => (
-                      <TableRow key={user.ID}>
-                        <TableCell align="right">{user._id}</TableCell>
-                        <TableCell align="center">
-                          <Box display="flex" justifyContent="center">
-                            <Avatar src={user.avatar} />
-                          </Box>
-                        </TableCell>
-                        <TableCell align="left">{user.name}</TableCell>
-                        <TableCell align="left">{user.surname}</TableCell>
-                        <TableCell align="left">{user.email}</TableCell>
+                    {items.map((item) => (
+                      <TableRow key={item.ID}>
+                        <TableCell align="left">{item.title}</TableCell>
+                        <TableCell align="left">{item.description}</TableCell>
+                        <TableCell align="left">{item.price}</TableCell>
                         <TableCell align="center">
                           <ButtonGroup color="primary" aria-label="outlined primary button group">
-                            <Button onClick={() => UpdateUser(1)}>Edit</Button>
-                            <Button onClick={() => DeleteUser(user._id)}>Del</Button>
+                            <Button onClick={() => UpdateItem(item)}>Edit</Button>
+                            <Button onClick={() => DeleteItem(item._id)}>Del</Button>
                           </ButtonGroup>
                         </TableCell>
                       </TableRow>
@@ -111,7 +102,9 @@ class Users extends Component {
                   
                 </Table>
               </TableContainer>
-              </Paper>
+              </Paper>: 
+                    <Alert className="text-center" color="danger">Login to watch items!</Alert>
+                    }
             </Container>
           </div>
 
@@ -123,9 +116,9 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user,
+    item: state.item,
     isAuthenticated: state.auth.isAuthenticated,
     userAuth: state.auth.user
 })
 
-export default connect(mapStateToProps, {getUsers})(Users);
+export default connect(mapStateToProps, { getItems, deleteItem, updateItem })(Items);

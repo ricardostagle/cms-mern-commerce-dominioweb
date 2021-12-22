@@ -3,6 +3,9 @@ import AppNavbar from '../header/AppNavbar';
 import Footer from '../footer/Footer';
 import RegisterUserModal from './CreateUser';
 import UpdateUserModal from './UpdateUserModal';
+import {
+    Alert
+} from 'reactstrap';
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -40,10 +43,10 @@ class Users extends Component {
 
     render(){
         const CreateUser = id => {
-          window.location = '/create_user'
+          window.location = '/create-user'
         }
         const UpdateUser = (user) => {
-          window.location = '/update_user/'+user._id
+          window.location = '/update-user/'+user._id
         }
 
         const DeleteUser = id => {
@@ -59,7 +62,8 @@ class Users extends Component {
           <AppNavbar/>
 
           <div className="row-content">
-            <Container maxWidth="lg">    
+            <Container maxWidth="lg"> 
+              { this.props.isAuthenticated ?   
               <Paper >
                 <Box display="flex">
                   <Box flexGrow={1}>
@@ -110,7 +114,9 @@ class Users extends Component {
                   
                 </Table>
               </TableContainer>
-              </Paper>
+              </Paper>: 
+                    <Alert className="text-center" color="danger">Login to watch users!</Alert>
+                    }
             </Container>
           </div>
 

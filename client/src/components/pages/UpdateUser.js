@@ -6,6 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import {
+    Alert
+} from 'reactstrap';
+
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -89,6 +93,7 @@ class UpdateUser extends Component {
             <AppNavbar/>
               <div class=" row-content">
                 <Container maxWidth="xs">
+                  { this.props.isAuthenticated ? 
                   <div class="makeStyles-paper-1">
                   <Typography component="h1" variant="h5">
                     Update User
@@ -182,7 +187,9 @@ class UpdateUser extends Component {
                       Update
                     </Button>
                   </form>
-                  </div>
+                  </div>: 
+                    <Alert className="text-center" color="danger">Login to watch users!</Alert>
+                    }
               </Container>
             </div>
           <Footer/>

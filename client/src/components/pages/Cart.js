@@ -44,19 +44,19 @@ class Cart extends Component {
         return(
             <div>
                 <AppNavbar/>
+                <Container>
+                <div className="row-content">
                 {this.props.isAuthenticated ?
                     <Fragment>
                         {this.props.cart.cart ? null :
                             <Alert color="info" className="text-center">Your cart is empty!</Alert>
                         }
                     </Fragment>
-                    : <Alert color="danger" className="text-center">Login to View!</Alert>
+                    :  <Alert color="danger" className="text-center">Login to View!</Alert>
                 }  
-        
             
-                {this.props.isAuthenticated && !this.props.cart.loading && this.state.loaded && this.props.cart.cart?
-                <Container>
-                    <div className="row row-content">
+                {this.props.isAuthenticated && !this.props.cart.loading && this.state.loaded && this.props.cart.cart ?
+                        <div className="row">
                         {this.props.cart.cart.items.map((item)=>(
                             <div className="col-md-4">
                         <Card>
@@ -90,9 +90,11 @@ class Cart extends Component {
                             </CardBody>
                         </Card>
                         </div>
+                        </div>
+                    :null
+                    }
                     </div>
                 </Container>
-                    :null}
                 <Footer/>
             </div>
             
