@@ -29,22 +29,22 @@ class Orders extends Component {
         if(this.props.isAuthenticated && !this.props.order.loading && !this.state.loaded){
             this.ongetOrders(user._id);
         }
+
         return(
             <div>
                 <AppNavbar/>
                 <Container>
                 <div className="row-content">
-                {this.props.isAuthenticated ?
-                    <Fragment>
-                        {this.props.order.orders!==[] ? null :
-                            <Alert color="info" className="text-center">You have no orders!</Alert>
-                        }
-                    </Fragment>
-                    : <Alert color="danger" className="text-center">Login to View!</Alert>
-                }
+                    {this.props.isAuthenticated ?
+                        <Fragment>
+                            {this.props.order.orders.length ? null :
+                                <Alert color="info" className="text-center">You have no orders!</Alert>
+                            }
+                        </Fragment>
+                        : <Alert color="danger" className="text-center">Login to View!</Alert>
+                    }
 
-                {this.props.isAuthenticated && !this.props.order.loading && this.state.loaded && this.props.order.orders.length?
-
+                    {this.props.isAuthenticated && !this.props.order.loading && this.state.loaded && this.props.order.orders.length?
                         <div className="row">
                             {this.props.order.orders.map((order)=>(
                                 <div className="col-md-12">
@@ -67,13 +67,11 @@ class Orders extends Component {
                                     </Card>
                                     <br/>
                                 </div>
-                                
                             ))}
                         </div>
-                    
-                :null}
+                    :null}
                     </div>
-                </Container>
+                    </Container>
                 <Footer/>
             </div>
         )

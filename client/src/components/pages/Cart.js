@@ -56,41 +56,41 @@ class Cart extends Component {
                 }  
             
                 {this.props.isAuthenticated && !this.props.cart.loading && this.state.loaded && this.props.cart.cart ?
-                        <div className="row">
+                    <div className="row">
                         {this.props.cart.cart.items.map((item)=>(
                             <div className="col-md-4">
-                        <Card>
-                            <CardBody>
-                                <CardTitle tag="h5">{item.name}</CardTitle>
-                                <CardSubtitle tag="h6">$ {item.price}</CardSubtitle>
-                                <div style={qtyBox}>
-                                  <p style={{...qtyBtn, border:"1px solid red", color: "Red"}} onClick={() => this.onUpdateQuantity(user._id, item.productId, item.quantity - 1)}>
-                                    -1
-                                  </p>
-                                  <CardText>Quantity - {item.quantity}</CardText>
-                                  <p style={{...qtyBtn, border:"1px solid green", color: "green"}} onClick={() => this.onUpdateQuantity(user._id, item.productId, item.quantity + 1)}>
-                                    +1
-                                  </p>
-                                </div>
-                                <Button color="danger" onClick={this.onDeleteFromCart.bind(this, user._id, item.productId)}>Delete</Button>
-                            </CardBody>
-                        </Card>
-                        <br/>
-                        </div>
+                                <Card>
+                                    <CardBody>
+                                        <CardTitle tag="h5">{item.name}</CardTitle>
+                                        <CardSubtitle tag="h6">$ {item.price}</CardSubtitle>
+                                        <div style={qtyBox}>
+                                          <p style={{...qtyBtn, border:"1px solid red", color: "Red"}} onClick={() => this.onUpdateQuantity(user._id, item.productId, item.quantity - 1)}>
+                                            -1
+                                          </p>
+                                          <CardText>Quantity - {item.quantity}</CardText>
+                                          <p style={{...qtyBtn, border:"1px solid green", color: "green"}} onClick={() => this.onUpdateQuantity(user._id, item.productId, item.quantity + 1)}>
+                                            +1
+                                          </p>
+                                        </div>
+                                        <Button color="danger" onClick={this.onDeleteFromCart.bind(this, user._id, item.productId)}>Delete</Button>
+                                    </CardBody>
+                                </Card>
+                                <br/>
+                            </div>
                         ))}
                         <div class="col-md-12">
-                        <Card>
-                            <CardBody>
-                                <CardTitle tag="h5">Total Cost = $ {this.props.cart.cart.bill}</CardTitle>
-                                <Checkout
-                                    user={user._id}
-                                    amount={this.props.cart.cart.bill}
-                                    checkout={this.props.checkout}
-                                />                   
-                            </CardBody>
-                        </Card>
+                            <Card>
+                                <CardBody>
+                                    <CardTitle tag="h5">Total Cost = $ {this.props.cart.cart.bill}</CardTitle>
+                                    <Checkout
+                                        user={user._id}
+                                        amount={this.props.cart.cart.bill}
+                                        checkout={this.props.checkout}
+                                    />                   
+                                </CardBody>
+                            </Card>
                         </div>
-                        </div>
+                    </div>
                     :null
                     }
                     </div>
