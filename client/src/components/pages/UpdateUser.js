@@ -61,7 +61,7 @@ class UpdateUser extends Component {
 
         await this.props.updateUser(user_id, updateUser);
 
-        window.location.href = '/myusers';
+        window.location.href = '/my-users';
     }
 
     render(){

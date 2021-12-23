@@ -1,117 +1,140 @@
-import { Component } from 'react';
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Container,
-    Alert
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import { addItem } from '../../actions/itemActions';
-import PropTypes from 'prop-types';
+import React, { Component, useState, useEffect } from "react";
 import AppNavbar from '../header/AppNavbar';
 import Footer from '../footer/Footer';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import {
+    Input,
+    Alert
+} from 'reactstrap';
 
-class AddItem extends Component {
+
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { updateItem } from "../../actions/itemActions";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+class UpdateItem extends Component {
+
     state = {
-        title: '',
-        description: '',
-        category: '',
-        price: '',
+        item: [],
+        id: this.props.match.params.id,
+        isFetching: true  
     }
 
     static propTypes = {
         isAuthenticated: PropTypes.bool
     }
 
-    onChange = (e) => {
-        this.setState({[e.target.name]:e.target.value});
+    componentDidMount() { 
+
+      //console.log(this)
+      const id = this.props.match.params.id;
+        
+        if(this.state.isFetching){
+          const req = fetch('/api/items/'+id, {
+            method: 'PUT',
+          })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              if (result && this.state.isFetching === true) {
+                this.setState({
+                  item: result,
+                  isFetching: false
+                });
+                
+              }
+            }
+          )
+        }
+
     }
 
     onSubmit = async (e) => {
         e.preventDefault();
+        let item_id = this.props.match.params.id;
+        let updatedItem = this.state.item
+        console.log(item_id)
+        console.log(updatedItem)
+        await this.props.updateItem(item_id, updatedItem);
+        window.location.href = '/my-items';
+    }
 
-        const newItem = {
-            title: this.state.title,
-            description: this.state.description,
-            category: this.state.category,
-            price: this.state.price
-        }
-
-        await this.props.addItem(newItem);
-
-        alert('Item added successfully');
+    onChange = (e) => {
+        let updatedItem = this.state.item
+        let field = e.target.name
+        updatedItem[field]= e.target.value
+        this.setState({
+            item:updatedItem
+        });
     }
 
     render(){
-        return(
-            <div>
-                <AppNavbar/>
-                <Container>
-                <div class="row-content">
-                    <h2 className="text-center mb-3">Add a new Item</h2>
-                    { this.props.isAuthenticated ?
-                    <Form onSubmit={this.onSubmit}>
-                        <FormGroup>
-                            <Label for="title">Title</Label>
-                            <Input
-                                type="text"
-                                name="title"
-                                id="title"
-                                placeholder="Title of the item"
-                                onChange={this.onChange}
-                            />
-                            <br/>
-                            <Label for="description">Description</Label>
-                            <Input
-                                type="text"
-                                name="description"
-                                id="description"
-                                placeholder="Description of the item"
-                                onChange={this.onChange}
-                            />
-                            <br/>
-                            <Label for="category">Category</Label>
-                            <Input 
-                                type="text"
-                                name="category" 
-                                id="category"
-                                placeholder="Category of the item"
-                                onChange={this.onChange}
-                                >
-                            </Input>
-                            <br/>
-                            <Label for="price">Price</Label>
-                            <Input
-                                type="number"
-                                name="price"
-                                id="price"
-                                placeholder="Price of the item"
-                                onChange={this.onChange}
-                            />
-                            
-                            <Button
-                                color="dark"
-                                style={{marginTop: '2rem'}}
-                                block
-                            >Add Item</Button>
-                        </FormGroup>
-                    </Form> : 
-                    <Alert className="text-center" color="danger">Login to add items!</Alert>
+        let items =  this.state.item
+
+        return (
+          <div>
+            <AppNavbar/>
+              <div className="row-content">
+                <Container maxWidth="xs">
+   
+                  { this.props.isAuthenticated ? 
+                  <div className="makeStyles-paper-1">
+                  <Typography component="h1" variant="h5">
+                    Update Item
+                  </Typography>
+                 
+                  <form onSubmit={this.onSubmit}>
+                    <Grid container spacing={2} style={{'margin': '20px -8px'}}>
+                    { items ? Object.keys(items).map((item) => (
+                        <Grid item xs={12}  key={item.toString()}>
+                        <TextField
+                          autoComplete={item}
+                          variant="outlined"
+                          fullWidth
+                          name={item}
+                          id={item}
+                          value={this.state.item[item]}
+                          label={item}
+                          onChange={this.onChange}
+                          autoFocus
+                        />
+                      </Grid>
+                    ))
+                    : null
                     }
-                    </div>
-                </Container>
-                <Footer/>
+
+                    </Grid>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                    >
+                      Update
+                    </Button>
+                  </form>
+                  </div>: 
+                    <Alert className="text-center" color="danger">Please, login to watch this item.</Alert>
+                    }
+              </Container>
             </div>
-        )
+          <Footer/>
+        </div>
+          
+        );
     }
 }
 
 const mapStateToProps = (state) => ({
     item: state.item,
     isAuthenticated: state.auth.isAuthenticated,
-});
+    userAuth: state.auth.user
+})
 
-export default connect(mapStateToProps,{addItem})(AddItem);
+export default connect(mapStateToProps, {updateItem})(UpdateItem);
