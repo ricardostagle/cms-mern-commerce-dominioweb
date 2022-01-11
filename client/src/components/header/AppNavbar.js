@@ -196,6 +196,7 @@ class AppNavbar extends Component {
                     { isAdmin ? <MenuItem onClick={popupState.close}><a href="/my-users">Users</a></MenuItem> : ''}
                     { isAdmin ? <MenuItem onClick={popupState.close}><a href="/my-items">Items</a></MenuItem> : ''}
                     { isAdmin ? <MenuItem onClick={popupState.close}><a href="/add-item">Add Item</a></MenuItem> : ''}
+                    { isAdmin ? <MenuItem onClick={popupState.close}><a href="/home-commerce">Amazon</a></MenuItem> : ''}
                     <MenuItem onClick={popupState.close}><Logout/></MenuItem>
                    
                   </Menu>

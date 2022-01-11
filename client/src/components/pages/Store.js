@@ -10,8 +10,31 @@ import { Link } from "react-router-dom"
 
 class Store extends Component {
 
+    state = {
+        itemsFetch: [],
+        isFetching: true  
+    }
+
     componentDidMount(){
         this.props.getItems();
+        
+        if(this.state.isFetching){
+          const req = fetch('/api/items', {
+            method: 'GET',
+          })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              if (result && this.state.isFetching === true) {
+                this.setState({
+                  itemsFetch: result,
+                  isFetching: false
+                });
+              }
+            }
+          )
+        }
+
     }
 
     static propTypes = {
@@ -37,13 +60,16 @@ class Store extends Component {
          }
 
         const user = this.props.user;
+
+        const { itemsFetch } = this.state.itemsFetch;
+
         return (
             <div>
             <AppNavbar/>
             <Container>
                 <div className="row row-content" id="HOME">
                 {items.length ? items.map((item)=>(
-                    <div className="col-md-4">
+                    <div className="col-md-4" key={item._id}>
                     <div className="thumbnail"> 
                         <img src={item.media} alt={item.name} width="100%" />
                     </div>
@@ -55,7 +81,7 @@ class Store extends Component {
                                     key={item._id}>
                                     {item.title}</Link>
                             </CardTitle>
-                            <CardSubtitle tag="h6">$ {item.price}</CardSubtitle>
+                            <CardSubtitle tag="h6"> { item.cost ? '$ '+item.cost : '13300000000000'} USD </CardSubtitle>
                             <CardText>
                                 <Link 
                                     to={"/category/"+item.category}

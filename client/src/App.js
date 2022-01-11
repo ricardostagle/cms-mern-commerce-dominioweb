@@ -6,6 +6,9 @@ import store from './store';
 import {loadUser} from './actions/authActions';
 import { BrowserRouter } from 'react-router-dom';
 
+//import Header from '../../header';
+//import './App.scss';
+
 class App extends Component {
   componentDidMount(){
     store.dispatch(loadUser());

@@ -4,7 +4,7 @@ import { mdiMinus, mdiPlus } from '@mdi/js';
 
 import './AddToCart.scss';
 
-import { useCartDispatch, useCartState } from 'cart-context';
+import { useCartDispatch, useCartState } from '../../cart-context';
 
 function AddToCard({ product }) {
   const { products } = useCartState();

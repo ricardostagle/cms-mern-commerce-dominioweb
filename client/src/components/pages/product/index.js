@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from "react-router-dom";
-import ImageSlider from '../../components/product/ImageSlider';
-import Information from '../../components/product/Information';
+import ImageSlider from '../../product/ImageSlider';
+import Information from '../../product/Information';
 import './index.scss';
 
-import productsApi from 'api/products';
-import Loader from 'components/general/Loader';
-import Error from 'components/general/Error';
-import products from 'api/products';
+import productsApi from '../../../api/products';
+import Loader from '../../general/Loader';
+import Error from '../../general/Error';
+import products from '../../../api/products';
+
+import HeaderAmazon from '../../header';
+import '../../../App.scss';
 
 function ProductPage() {
   let { productId } = useParams();
@@ -43,9 +46,12 @@ function ProductPage() {
     return <Error message="Failed to load products" actionFn={loadProduct} />;
   } else if (product) {
     return (
+      <div>
+        <HeaderAmazon />
       <div className="product">
         <ImageSlider product={product} />
         <Information product={product} />
+      </div>
       </div>
     );
   } else {
