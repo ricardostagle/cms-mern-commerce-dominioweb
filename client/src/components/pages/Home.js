@@ -80,7 +80,7 @@ class Home extends Component {
 
                                 <div class="col-md-6">
                                         <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                                            <img src="/imgs/tecnologias.png" alt="" />
+                                            <img class="illustration" src="/imgs/tecnologias.png" alt="" />
                                         </div>
                                 </div>
 
@@ -115,7 +115,7 @@ class Home extends Component {
                                     </div>
                                     <div class="col-md-6">
                                         <div class="about_phone wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
-                                            <img src="/imgs/valores.png" alt="" />
+                                            <img class="illustration" src="/imgs/valores.png" alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ class Home extends Component {
                         </div>
 
 
-                    <section  id="FONDO2" class={"fun_facts bg"+this.state.random}>
+                    <section  id="FONDO2" class={"parallax fun_facts bg"+this.state.random}>
                         <div class="section_overlay">
                             
                         </div>
@@ -142,7 +142,7 @@ class Home extends Component {
                                     </div>
                                     <div class="col-md-6 wow fadeInRightBig">
                                         <div class="video">
-                                            <img src="/imgs/construccion-calidad.png" alt="" />
+                                            <img class="illustration" src="/imgs/construccion-calidad.png" alt="" />
                                         </div>
                                     </div>
                                     
@@ -223,7 +223,7 @@ class Home extends Component {
                         </div>
                     </section>
 
-                    <section  id="FONDO3" class={"fun_facts bg"+this.state.random}>
+                    <section  id="FONDO3" class={"parallax fun_facts bg"+this.state.random}>
                         <div class="section_overlay">
                             
                         </div>
