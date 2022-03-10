@@ -13,11 +13,14 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Table from '@material-ui/core/Table';
+
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableFooter from '@material-ui/core/TableFooter';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
@@ -27,6 +30,14 @@ import { getUsers, deleteUser, updateUser } from "../../actions/userActions";
 import { Link } from "react-router-dom"
 
 class Users extends Component {
+    state = {
+        error: null,
+        isLoaded:false,
+        items: [],
+        totalRows: 0,
+        perPage: 12,
+        page:0,
+    }
 
     componentDidMount(){
         this.props.getUsers();
@@ -38,7 +49,7 @@ class Users extends Component {
         deleteUser: PropTypes.func.isRequired,
         user: PropTypes.object.isRequired,
         isAuthenticated: PropTypes.bool,
-        userAuth: PropTypes.object.isRequired
+        userAuth: PropTypes.object.isRequired, 
     }
 
     render(){
@@ -56,6 +67,20 @@ class Users extends Component {
 
         const { users } = this.props.user;
 
+        const handlePageChange = (
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null , 
+          newPage: number,
+        ) => {
+          this.setState({page:newPage});
+        }
+
+        const handlePerRowsChange = (
+          event: React.ChangeEvent<HTMLInputElement>
+          ) => {
+          this.setState({perPage:parseInt(event.target.value, 10)});
+          this.setState({page:0});
+        };
+
         return (
           <div>
 
@@ -63,7 +88,10 @@ class Users extends Component {
 
           <div className="row-content">
             <Container maxWidth="lg"> 
-              { this.props.isAuthenticated ?   
+              { this.props.isAuthenticated ? 
+               this.state.error ? 
+                  <div>Error: {this.props.error.message}</div>
+                :  
               <Paper >
                 <Box display="flex">
                   <Box flexGrow={1}>
@@ -77,6 +105,7 @@ class Users extends Component {
                     </Link>
                   </Box>
                 </Box>
+
                 <TableContainer component={Paper}>
                 <Table aria-label="simple table">
                   <TableHead>
@@ -91,7 +120,11 @@ class Users extends Component {
                   </TableHead>
 
                   <TableBody>
-                    {users.map((user) => (
+                    {(
+                      this.state.perPage > 0 
+                        ? users.slice(this.state.page * this.state.perPage, this.state.page * this.state.perPage + this.state.perPage)
+                        : users
+                    ).map((user) => (
                       <TableRow key={user.ID}>
                         <TableCell align="right">{user._id}</TableCell>
                         <TableCell align="center">
@@ -111,14 +144,47 @@ class Users extends Component {
                       </TableRow>
                     ))}
                   </TableBody>
-                  
+                  <TableFooter>
+                    <TableRow>
+                      <TablePagination
+                        count={users.length}
+                        rowsPerPage={this.state.perPage}
+                        page={this.state.page}
+                        onPageChange={handlePageChange}
+                        onRowsPerPageChange={handlePerRowsChange}
+                        rowsPerPageOptions={[5, 10, 25]}
+                        labelRowsPerPage={<span>Rows:</span>}
+                        backIconButtonProps={{
+                          color: "secondary"
+                        }}
+                        nextIconButtonProps={{ color: "secondary" }}
+                        SelectProps={{
+                          inputProps: {
+                            "aria-label": "page number"
+                          }
+                        }}
+                        showFirstButton={true}
+                        showLastButton={true}
+                        //ActionsComponent={TablePaginationActions}
+                        //component={Box}
+                        //sx and classes prop discussed in styling section
+                      />
+                    </TableRow>
+                  </TableFooter>
                 </Table>
               </TableContainer>
-              </Paper>: 
-                    <Alert className="text-center" color="danger">Login to watch users!</Alert>
-                    }
+              </Paper>
+              : <Alert className="text-center" color="danger">Login to watch users!</Alert>
+            }
             </Container>
           </div>
+
+          /*
+          { !this.state.isLoaded ?
+            <div>Loading...</div>
+          : ''
+          }
+          */
 
           <Footer/>
           </div>

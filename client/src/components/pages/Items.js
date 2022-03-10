@@ -16,6 +16,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableFooter from '@material-ui/core/TableFooter';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
@@ -25,6 +27,14 @@ import { getItems, deleteItem, updateItem } from "../../actions/itemActions";
 import { Link } from "react-router-dom"
 
 class Items extends Component {
+    state = {
+        error: null,
+        isLoaded:false,
+        items: [],
+        totalRows: 0,
+        perPage: 5,
+        page:0,
+    }
 
     componentDidMount(){
         this.props.getItems();
@@ -54,18 +64,37 @@ class Items extends Component {
 
         const { items } = this.props.item;
 
+        const handlePageChange = (
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null , 
+          newPage: number,
+        ) => {
+          this.setState({page:newPage});
+        }
+
+        const handlePerRowsChange = (
+          event: React.ChangeEvent<HTMLInputElement>
+          ) => {
+          this.setState({perPage:parseInt(event.target.value, 10)});
+          this.setState({page:0});
+        };
+
         return (
           <div>
 
           <AppNavbar/>
 
           <div className="row-content">
-            <Container maxWidth="lg">  
-            { this.props.isAuthenticated ?    
+            
+            <Container maxWidth="lg"> 
+            { this.props.isAuthenticated ? 
+                <h1>ITEMS</h1>
+              : ''
+            } 
+            { this.props.isAuthenticated ? 
               <Paper >
                 <Box display="flex">
                   <Box flexGrow={1}>
-                    <Typography component="h2" variant="h6" color="primary" gutterBottom>ITEMS</Typography>
+                    <Typography component="h1" variant="h6" color="primary" gutterBottom>ITEMS</Typography>
                   </Box>
                   <Box>
                     <Link to="/create">
@@ -79,13 +108,17 @@ class Items extends Component {
                     <TableRow>
                       <TableCell align="left">Title</TableCell>
                       <TableCell align="left">Description</TableCell>
-                      <TableCell align="left">Date</TableCell>
+                      <TableCell align="left">Price</TableCell>
                       <TableCell align="center">Action</TableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
-                    {items.map((item) => (
+                    {(
+                      this.state.perPage > 0 
+                        ? items.slice(this.state.page * this.state.perPage, this.state.page * this.state.perPage + this.state.perPage)
+                        : items
+                    ).map((item) => (
                       <TableRow key={item.ID}>
                         <TableCell align="left">{item.title}</TableCell>
                         <TableCell align="left">{item.description}</TableCell>
@@ -99,6 +132,33 @@ class Items extends Component {
                       </TableRow>
                     ))}
                   </TableBody>
+                  <TableFooter>
+                    <TableRow>
+                      <TablePagination
+                        count={items.length}
+                        rowsPerPage={this.state.perPage}
+                        page={this.state.page}
+                        onPageChange={handlePageChange}
+                        onRowsPerPageChange={handlePerRowsChange}
+                        rowsPerPageOptions={[5, 10, 25]}
+                        labelRowsPerPage={<span>Rows:</span>}
+                        backIconButtonProps={{
+                          color: "secondary"
+                        }}
+                        nextIconButtonProps={{ color: "secondary" }}
+                        SelectProps={{
+                          inputProps: {
+                            "aria-label": "page number"
+                          }
+                        }}
+                        showFirstButton={true}
+                        showLastButton={true}
+                        //ActionsComponent={TablePaginationActions}
+                        //component={Box}
+                        //sx and classes prop discussed in styling section
+                      />
+                    </TableRow>
+                  </TableFooter>
                   
                 </Table>
               </TableContainer>
