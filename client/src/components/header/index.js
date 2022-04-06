@@ -11,8 +11,8 @@ import Orders from './Orders';
 
 function Header() {
   return (
-    <header className="header">
-      <div className="header__container">
+    <header className="commerce_header">
+      <div className="commerce_header__container">
         <Logo />
         <DeliveryLocation />
         <Search />

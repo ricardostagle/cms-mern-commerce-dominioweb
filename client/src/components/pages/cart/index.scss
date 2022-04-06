@@ -1,7 +1,8 @@
 .cart {
   width: 100%;
-  max-width: 150rem;
-  margin: 0 auto;
+  /*max-width: 150rem;*/
+  margin: 100px auto;
+  position: absolute;
 
   &__main {
     display: flex;

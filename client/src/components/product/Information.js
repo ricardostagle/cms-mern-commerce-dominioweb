@@ -1,9 +1,9 @@
 import React from 'react';
 import './Information.scss';
-import Rating from 'components/general/Rating';
-import { calculatePriceDetails } from 'utils.js/product';
-import CurrencyFormat from 'components/general/CurrencyFormat';
-import AddToCard from 'components/product/AddToCart';
+import Rating from '../general/Rating';
+import { calculatePriceDetails } from '../../utils.js/product';
+import CurrencyFormat from '../general/CurrencyFormat';
+import AddToCard from '../product/AddToCart';
 
 function Information({ product }) {
     const { finalPrice, basePrice } = calculatePriceDetails(

@@ -4,9 +4,9 @@ import { mdiClose } from '@mdi/js';
 
 import './CartItem.scss';
 
-import CurrencyFormat from 'components/general/CurrencyFormat';
-import { calculatePriceDetails } from 'utils.js/product';
-import AddToCard from 'components/product/AddToCart';
+import CurrencyFormat from '../../../components/general/CurrencyFormat';
+import { calculatePriceDetails } from '../../../utils.js/product';
+import AddToCard from '../../../components/product/AddToCart';
 
 function CartItem({ product }) {
   const { finalPrice } = calculatePriceDetails(product.price);

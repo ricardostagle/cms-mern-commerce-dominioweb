@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 
 import './Cart.scss';
 
-import { useCartState } from 'cart-context';
+import { useCartState } from '../../cart-context';
 
 function Cart() {
   const { totalQuantity } = useCartState();
 
   return (
-    <Link to="/cart" className="h-cart">
+    <Link to="/cart-commerce" className="h-cart">
       <Icon path={mdiCartOutline} size={1.4} />
       <div className="h-cart__count">{totalQuantity}</div>
     </Link>

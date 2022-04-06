@@ -2,15 +2,19 @@ import React from 'react';
 
 import './index.scss';
 
-import { useCartState } from 'cart-context';
+import HeaderAmazon from '../../header';
+import '../../../App.scss';
+import { useCartState } from '../../../cart-context';
 import CartItem from './CartItem';
-import CurrencyFormat from 'components/general/CurrencyFormat';
+import CurrencyFormat from '../../../components/general/CurrencyFormat';
 
 function CartPage() {
   const { products, totalQuantity, totalPrice } = useCartState();
   const productIds = Object.keys(products).filter((id) => products[id]);
 
   return (
+    <div>
+    <HeaderAmazon />
     <div className="cart">
       <div className="cart__main">
         <div className="cart__items">
@@ -28,6 +32,7 @@ function CartPage() {
           />
         </div>
       </div>
+    </div>
     </div>
   );
 }

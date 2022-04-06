@@ -1,9 +1,6 @@
 import { Component } from 'react';
 import AddItem from './pages/AddItem';
 import Home from './pages/Home';
-import HomeCommerce from './pages/home';
-import CartPage from './pages/cart';
-import ProductPage from './pages/product';
 import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cart from './pages/Cart';
@@ -19,10 +16,14 @@ import Users from './pages/Users';
 import Items from './pages/Items';
 import Store from './pages/Store';
 
+import HomeCommerce from './pages/home';
+import CartPage from './pages/cart';
+import ProductPage from './pages/product';
+
 class Main extends Component {
     render(){
         return (
-                <Router>
+            <Router>
                 <div className="page-container">
                 <Switch>
                     <Route path="/home"><Home/></Route>
