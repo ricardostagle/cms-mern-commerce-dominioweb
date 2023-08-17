@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "predeploy": "npm i && npm run client-install && npm run dev",
-    "deploy": "gh-pages -d dev",
+    "deploy": "gh-pages -d build",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
@@ -22,7 +22,7 @@
     "config": "^3.3.3",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.1",
     "mongoose": "^5.11.11",
     "redux-devtools-extension": "^2.13.9",
     "stripe": "^8.130.0",
