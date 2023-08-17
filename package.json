@@ -5,13 +5,13 @@
   "description": "website & e-commerce app",
   "main": "server.js",
   "scripts": {
-    "predeploy": "npm run client-install && npm run build",
+    "predeploy": "npm i && npm run client-install && npm run dev && npm run build",
     "deploy": "gh-pages -d build",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "build": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "react-scripts build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -25,9 +25,16 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^5.11.11",
+    "react-scripts": "^5.0.1",
     "redux-devtools-extension": "^2.13.9",
     "stripe": "^8.130.0",
-    "validator": "^13.5.2"
+    "validator": "^13.5.2",
+    "babel-jest": "^26.6.0",
+    "babel-loader": "8.1.0",
+    "eslint": "^7.11.0",
+    "jest": "26.6.0",
+    "webpack": "4.44.2",
+    "webpack-dev-server": "3.11.0"
   },
   "devDependencies": {
     "gh-pages": "^6.0.0",
