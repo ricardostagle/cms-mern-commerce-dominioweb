@@ -1,9 +1,12 @@
 {
+  "hompage": "https://ricardostagle.github.io/cms-mern-commerce-dominioweb",
   "name": "e-commerce",
   "version": "1.0.0",
   "description": "An e-commerce app",
   "main": "server.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
@@ -26,6 +29,7 @@
     "validator": "^13.5.2"
   },
   "devDependencies": {
+    "gh-pages": "^6.0.0",
     "nodemon": "^2.0.7"
   }
 }
