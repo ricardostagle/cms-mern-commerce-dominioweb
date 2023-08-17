@@ -5,8 +5,8 @@
   "description": "An e-commerce app",
   "main": "server.js",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm i && npm run client-install && npm run dev",
+    "deploy": "gh-pages -d dev",
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
