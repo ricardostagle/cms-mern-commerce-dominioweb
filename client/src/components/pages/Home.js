@@ -291,9 +291,9 @@ class Home extends Component {
                                         <div class="right_single_feature">
                                                 <div><span class="fa fa-phone"></span></div>
                                                 <h3><span>/</span>Call us</h3>
-                                                Mobile: 717-500-2601
-                                                Mexico mobile: 55 1333-9558
-                                                What's up: +52 1 55 1333-9558
+                                                <p>Mobile: +1 717 500 1100</p>
+                                                <p>Mexico mobile: 55 1333 9558</p>
+                                                <p>WhatsApp: +52 55 1333 9558</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
