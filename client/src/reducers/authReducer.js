@@ -21,7 +21,7 @@ const initialState = {
     user: null
 }
 
-export default function(state=initialState, action){
+export default function authReducer(state=initialState, action){
     switch(action.type){
 
         case GET_USERS:
@@ -47,11 +47,9 @@ export default function(state=initialState, action){
             const { id, data } = action.payload;
             return{
                 ...state,
-                users: state.users.map(user => {
-                    if(user._id===id){
-                        user = data;
-                    }
-                })
+                users: state.users.map(user => 
+                    user._id===id ? user = data : user 
+                )
             };
 
         case USERS_LOADING:

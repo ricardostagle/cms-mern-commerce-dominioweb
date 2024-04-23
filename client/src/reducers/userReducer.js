@@ -12,7 +12,7 @@ const initialState = {
     loading: false
 }
 
-export default function(state=initialState, action){
+export default function userReducer(state=initialState, action){
     switch(action.type){
 
         case GET_USERS:
@@ -46,11 +46,9 @@ export default function(state=initialState, action){
             const { id, data } = action.payload;
             return{
                 ...state,
-                users: state.users.filter(user => {
-                    if(user._id===id){
-                        user = data;
-                    }
-                })
+                users: state.users.filter(user =>
+                    user._id===id ? user = data : user
+                )
             };
 
         case USERS_LOADING:

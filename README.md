@@ -20,7 +20,7 @@ NOTE: This is very basic, one without any username and password. This can be con
   2. `jwtsecret`: This is the key used sign jwt tokens. It can be set as `dummySecret`.
   3. `StripeAPIKey`: Create your account here [register](https://dashboard.stripe.com/register).
 2. Install dependencies with `npm i`.
-3. Server will start running on [port 4000](http://localhost:4000).
+3. Server will start running on [port 3000](http://localhost:3000).
 4. Create the client `npm run client-install`.
 5. If issues appeared run `npm audit fix`.
 6. Execute website locally with `npm run dev`.
