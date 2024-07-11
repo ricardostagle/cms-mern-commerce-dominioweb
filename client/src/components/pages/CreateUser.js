@@ -6,13 +6,12 @@ import {
     ModalBody,
     Form,
     FormGroup,
-    Label,
     Input,
     NavLink,
     Alert
 } from 'reactstrap';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addUser } from '../../actions/userActions';
@@ -101,7 +100,7 @@ class CreateUser extends Component {
   
       if (typeof input.password !== "undefined" && typeof input.confirm_password !== "undefined") {
           
-        if (input["password"] != input["confirm_password"]) {
+        if (input["password"] !== input["confirm_password"]) {
           isValid = false;
           errors["password"] = "Passwords don't match.";
         }

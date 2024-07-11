@@ -30,11 +30,9 @@ export default function itemReducer(state=initialState, action){
             const { id, data } = action.payload;
             return{
                 ...state,
-                items: state.items.map(item => {
-                    if(item._id===id){
-                        item = data;
-                    }
-                })
+                items: state.items.map(item => 
+                   item._id===id ? item = data : item
+                )
             }
 
         case ITEMS_LOADING:

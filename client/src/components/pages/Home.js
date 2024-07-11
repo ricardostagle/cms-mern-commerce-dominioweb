@@ -241,7 +241,7 @@ class Home extends Component {
                                     </div>
                                     
                                     <div class="col-md-2 no_padding">
-                                            <a href="">
+                                            <a href="#DOWNLOAD">
                                                 <div class="single_store">
                                                     <i class="fa fa-apple"></i>
                                                     <div class="store_inner">
@@ -251,7 +251,7 @@ class Home extends Component {
                                             </a>
                                     </div>
                                     <div class="col-md-2 no_padding">
-                                        <a href="">
+                                        <a href="#DOWNLOAD">
                                             <div class="single_store">
                                                 <i class="fa fa-android"></i>
                                                 <div class="store_inner">
@@ -261,7 +261,7 @@ class Home extends Component {
                                         </a>
                                     </div>
                                     <div class="col-md-2 no_padding">
-                                        <a href="">
+                                        <a href="#DOWNLOAD">
                                             <div class="single_store last">
                                                 <i class="fa fa-windows"></i>
                                                 <div class="store_inner">

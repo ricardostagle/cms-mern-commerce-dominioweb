@@ -10,7 +10,7 @@ import UpdateUser from './pages/UpdateUser';
 import UpdateItem from './pages/UpdateItem';
 import CreateUser from './pages/CreateUser';
 import Category from './pages/Category';
-import My404Component from './pages/404';
+//import My404Component from './pages/404';
 import Detail from './pages/Detail';
 import Users from './pages/Users';
 import Items from './pages/Items';

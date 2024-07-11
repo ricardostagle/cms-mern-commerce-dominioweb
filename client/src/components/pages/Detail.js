@@ -1,7 +1,7 @@
 import { Component } from "react";
 import AppNavbar from '../header/AppNavbar';
 import Footer from '../footer/Footer';
-import { CardText, CardBody,  CardSubtitle, Button, Container, Alert} from "reactstrap";
+import { CardText, CardBody, CardSubtitle, Button, Container } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getItems } from "../../actions/itemActions";
@@ -53,6 +53,8 @@ class Detail extends Component {
         let item = items.filter(item => {
             if(item._id === id) {
                 return item;
+            }else{
+                return {};
             }
         });
 
