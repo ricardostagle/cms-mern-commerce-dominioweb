@@ -40,15 +40,16 @@
     "styled-components": "^6.1.8",
     "svgo": "^2.8.0",
     "validator": "^13.5.2",
-    "webpack": "^5.91.0",
+    "webpack": "^5.93.0",
     "webpack-dev-server": "^5.0.4"
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.7",
     "gh-pages": "^6.1.1",
     "nodemon": "^3.1.0"
   },
   "overrides": {
-    "@svgr/webpack": "^6.2.1",
+    "@svgr/webpack": "^8.1.0",
     "nth-check": "$nth-check",
     "ejs": "^3.1.10",
     "immer": "^9.0.21",
