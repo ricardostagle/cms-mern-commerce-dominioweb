@@ -7,7 +7,7 @@ const config =JSON.stringify({headers: {"Content-Type": "application/json"}})
 export const loadUser = () => (dispatch, getState) => {
     // User loading
     dispatch({ type: USER_LOADING });
-
+    console.log(config);
     axios.get('/api/user', tokenConfig(getState))
         .then(res => {
             console.log(res);
@@ -24,7 +24,7 @@ export const loadUser = () => (dispatch, getState) => {
 export const register = ({name, email, password}) => dispatch => {
     // headers
     const config =JSON.stringify({headers: {"Content-Type": "application/json"}})
-
+    console.log(config);
     //request body
     const body = JSON.stringify({name, email, password});
 

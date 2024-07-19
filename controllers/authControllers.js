@@ -15,7 +15,7 @@ module.exports.signup = (req,res) => {
         if(user) return res.status(400).json({msg: 'User already exists'});
 
         const newUser = new User({ name, email, password });
-
+        //console.log(newUser );
         // Create salt and hash
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(password, salt, (err, hash) => {
@@ -48,9 +48,11 @@ module.exports.signup = (req,res) => {
 
 module.exports.login = async (req,res) => {
     const { email, password } = req.body;
+    //console.log( req );
     if(!email || !password){
         res.status(400).json({msg: 'Please enter all fields'});
     }
+    //console.log( res );
     User.findOne({email})
         .then(user => {
             if(!user) return res.status(400).json({msg: 'User does not exist'});

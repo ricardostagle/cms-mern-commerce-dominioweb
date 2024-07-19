@@ -11,7 +11,7 @@
     "start": "node server.js && npm run dev",
     "server": "nodemon server.js --ignore client",
     "client": "npm start --max-http-header-size=12800000 --prefix client",
-    "build": "react-scripts --max-http-header-size=12800000 build",
+    "build": "react-scripts --max-http-header-size=12800000 build --ignore client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -27,6 +27,7 @@
     "eslint": "^7.11.0",
     "express": "^4.19.2",
     "firebase": "^10.11.0",
+    "http-proxy-middleware": "^3.0.0",
     "jest": "29.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.2",

@@ -23,9 +23,8 @@ class Home extends Component {
 
     static propTypes = {
         isAuthenticated: PropTypes.bool,
-        user: PropTypes.object.isRequired
+        //user: PropTypes.object.isRequired
     }
-
     render(){
 
         return (
