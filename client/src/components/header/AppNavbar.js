@@ -29,13 +29,12 @@ class AppNavbar extends Component {
 
         $(document).ready(function() {
 
+            $(".navbar-collapse").css({
+                'float': 'inline-end'
+            });
             if((window.location.protocol + '//' +window.location.host+'/home') === window.location.href){
 
-
                //MENU APPEAR AND HIDE
-               $(".navbar-collapse").css({
-                    'float': 'inline-end'
-                });
                 $(window).scroll(function() {
                     
                     if ($(window).scrollTop() > 100) {
