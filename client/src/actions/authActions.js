@@ -2,15 +2,14 @@ import axios from 'axios';
 import { returnErrors } from './errorActions';
 import { USER_LOADING, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL} from './types';
 // headers
-const config =JSON.stringify({headers: {"Content-Type": "application/json"}})
+const config =JSON.stringify({headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}})
 
 export const loadUser = () => (dispatch, getState) => {
     // User loading
     dispatch({ type: USER_LOADING });
-    console.log(config);
     axios.get('/api/user', tokenConfig(getState))
         .then(res => {
-            console.log(res);
+            console.log("/////////// "+ " load USER" );
             dispatch({ type: USER_LOADED,payload: res.data });
         })
         .catch(err => {
@@ -18,6 +17,7 @@ export const loadUser = () => (dispatch, getState) => {
             dispatch({
                 type: AUTH_ERROR
             });
+            console.log("/////////// "+ "load user error" +  err.response.status);
         });
 }
 
@@ -43,11 +43,11 @@ export const register = ({name, email, password}) => dispatch => {
 
 export const login = ({email, password}) => dispatch => {
     // headers
-    console.log(config);
     //request body
     const body = JSON.stringify({email, password});
     axios.post('/api/login',body,config)
         .then(res => {
+            console.log("/////////// Login ");
             console.log(res);
             dispatch({type: LOGIN_SUCCESS, payload: res.data });
         })
@@ -56,6 +56,9 @@ export const login = ({email, password}) => dispatch => {
             dispatch({
                 type: LOGIN_FAIL
             });
+            if(err.response.status===500) {
+                console.log("/////////// "+ "server side error");
+            }
         });
 }
 // logout user

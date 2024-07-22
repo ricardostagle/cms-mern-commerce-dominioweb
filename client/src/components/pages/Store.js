@@ -31,10 +31,10 @@ class Store extends Component {
         const { items } = this.props.item;
 
         items.sort((a, b) => a.title.localeCompare(b.title))
-
-        if (this.props.isAuthenticated ){
-             const user = this.props.user 
-         }
+        
+        /*if (this.props.isAuthenticated ){
+            const user = this.props.user 
+         }*/
 
         const user = this.props.user;
         return (

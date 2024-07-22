@@ -89,10 +89,10 @@ class UpdateUser extends Component {
         return (
           <div>
             <AppNavbar/>
-              <div class=" row-content">
+              <div className=" row-content">
                 <Container maxWidth="xs">
                   { this.props.isAuthenticated ? 
-                  <div class="makeStyles-paper-1">
+                  <div className="makeStyles-paper-1">
                   <Typography component="h1" variant="h5">
                     Update User
                   </Typography>
