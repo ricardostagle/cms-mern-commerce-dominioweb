@@ -41,7 +41,7 @@ class Home extends Component {
             <div>
                 <AppNavbar/>
                      <Container>
-                        <div class="row-content">
+                        <div className="row-content">
                         <h2 className="text-left mb-3">Page doesn't exist</h2>
                          </div>
                     

@@ -1,11 +1,11 @@
 import React, { Component, useState, useEffect } from "react";
 import AppNavbar from '../header/AppNavbar';
 import Footer from '../footer/Footer';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import {
     Alert
 } from 'reactstrap';
@@ -91,10 +91,10 @@ class UpdateUser extends Component {
         return (
           <div>
             <AppNavbar/>
-              <div class=" row-content">
+              <div className=" row-content">
                 <Container maxWidth="xs">
                   { this.props.isAuthenticated ? 
-                  <div class="makeStyles-paper-1">
+                  <div className="makeStyles-paper-1">
                   <Typography component="h1" variant="h5">
                     Update User
                   </Typography>

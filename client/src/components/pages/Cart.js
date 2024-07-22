@@ -78,7 +78,7 @@ class Cart extends Component {
                                 <br/>
                             </div>
                         ))}
-                        <div class="col-md-12">
+                        <div className="col-md-12">
                             <Card>
                                 <CardBody>
                                     <CardTitle tag="h5">Total Cost = $ {this.props.cart.cart.bill}</CardTitle>
