@@ -21,7 +21,7 @@ class Footer extends Component {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="copy_right_text">
-                                                <p>Copyright © 2021 <span>by </span><a href="http://dominioweb.com.mx/">DOMINIOWEB</a></p>
+                                                <p>Copyright © 2024 <span>by </span><a href="http://dominioweb.com.mx/">DOMINIOWEB</a></p>
                                             </div>
                                         </div>
 

@@ -33,7 +33,9 @@ class AppNavbar extends Component {
 
 
                //MENU APPEAR AND HIDE
-                
+               $(".navbar-collapse").css({
+                    'float': 'inline-end'
+                });
                 $(window).scroll(function() {
                     
                     if ($(window).scrollTop() > 100) {

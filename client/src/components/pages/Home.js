@@ -291,15 +291,15 @@ class Home extends Component {
                                         <div className="right_single_feature">
                                                 <div><span className="fa fa-phone"></span></div>
                                                 <h3><span>/</span>Call us</h3>
-                                                Mobile: 224-215-1433
-                                                Mexico mobile: 55 1333-9558
-                                                What's up: +52 1 55 1333-9558
+                                                <p>Mobile: +1 717 500 1100</p>
+                                                <p>Mexico mobile: 55 1333-9558</p>
+                                                <p>What's up: +52 1 55 1333-9558</p>
                                         </div>
                                     </div>
                                     <div className="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
                                         <div className="right_single_feature">
                                                 <div><span className="fa fa-map-marker"></span></div>
-                                                <h3><span>/</span>Adress</h3>
+                                                <h3><span>/</span>Address</h3>
                                                 <p>8th Lancaster St, Alta California, Tlajomulco de Zuñiga, Jalisco, C.P. 45645, Mexico.</p>
                                         </div>
                                     </div>
